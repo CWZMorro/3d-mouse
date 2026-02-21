@@ -64,7 +64,7 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 let isConnected = false;
 let qrcode = null;
 
-const socket = io(`http://${window.location.hostname}:3000`);
+const socket = io(`https://investigated-wilderness-bloom-proposition.trycloudflare.com`);
 
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
@@ -87,6 +87,24 @@ if (roomId) {
   
   const roomID = document.getElementById("roomID");
   roomID.innerHTML = `The current room ID is ${roomId}`;
+
+  const startSensors = async () => {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      const response = await DeviceOrientationEvent.requestPermission();
+      if (response !== 'granted') return;
+    }
+
+    window.addEventListener('deviceorientation', (event) => {
+      socket.emit('gyro-data', {
+        roomId: roomId,
+        alpha: event.alpha,
+        beta: event.beta,
+        gamma: event.gamma
+      });
+    });
+  };
+
+  document.body.addEventListener('click', startSensors, { once: true });
 }
 
 toggleConnectBtn.addEventListener("click", () => {
