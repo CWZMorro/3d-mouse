@@ -1,3 +1,5 @@
+// import { io } from "../node_modules/socket.io-client";
+
 const sx_slider = document.getElementById("sensitivity-x-slider");
 const sy_slider = document.getElementById("sensitivity-y-slider");
 const sx_label = document.getElementById("sensitivity-x-val");
@@ -62,6 +64,7 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 let isConnected = false;
 let qrcode = null;
 
+const socket = io(`http://${window.location.hostname}:3000`);
 
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
@@ -71,14 +74,19 @@ const qrcodeSection = document.getElementById("qrcode-section");
 const qrcodeContainer = document.getElementById("qrcode-container");
 const qrcodeUrl = document.getElementById("qrcode-url");
 
-function clearQRCode() {
-  if (qrcode) {
-    qrcode.clear();
-    qrcode = null;
-  }
-  qrcodeContainer.innerHTML = "";
-  qrcodeUrl.innerText = "";
-  qrcodeSection.classList.add("hidden");
+const urlParams = new URLSearchParams(window.location.search);
+const roomId = urlParams.get('room');
+
+// the link with roomID joins the room through the socket
+if (roomId) {
+  socket.emit('join-room', roomId);
+  socket.on('update-rotation', (data) => {
+    console.log("Received rotation: ", data);
+  });
+  showPage('roomPage');
+  
+  const roomID = document.getElementById("roomID");
+  roomID.innerHTML = `The current room ID is ${roomId}`;
 }
 
 toggleConnectBtn.addEventListener("click", () => {
@@ -88,7 +96,6 @@ toggleConnectBtn.addEventListener("click", () => {
     toggleConnectBtn.innerText = "Disconnect";
     toggleConnectBtn.classList.add("diconnect-btn");
     
-    // toggleConnectBtn.style.background = "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)";
     statusDot.classList.add("connected");
     statusText.innerText = "Connected";
     
@@ -106,7 +113,6 @@ toggleConnectBtn.addEventListener("click", () => {
     });
 
     qrcodeUrl.innerText = phoneUrl;
-    // WebSocket.emit('join-room', roomId);
 
   } else {
     toggleConnectBtn.innerText = "Connect Device";
@@ -116,3 +122,14 @@ toggleConnectBtn.addEventListener("click", () => {
     clearQRCode();
   }
 });
+
+function clearQRCode() {
+  if (qrcode) {
+    qrcode.clear();
+    qrcode = null;
+  }
+  qrcodeContainer.innerHTML = "";
+  qrcodeUrl.innerText = "";
+  qrcodeSection.classList.add("hidden");
+}
+
