@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -8,23 +9,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>frontend</title>
   </head>
+
   <body>
     <div id="app">
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src="./public/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img src="./src/javascript.svg" class="logo vanilla" alt="JavaScript logo" />
-        </a>
-        <h1>Hello Vite!</h1>
-        <div class="card">
-          <button id="counter" type="button"></button>
+
+      <!-- MAIN PAGE -->
+      <div class="page active" id="mainPage">
+        <div>
+          <img src="./public/random_logo.png" id="banner" alt="random logo">
+          <h2 id="simple-intro">Welcome to 3D Gyromouse</h2>
         </div>
-        <p class="read-the-docs">
-          Click on the Vite logo to learn more
-        </p>
+        <button id="connectBtn">Connect</button>
+        <button id="settingBtn">Settings</button>
       </div>
+
+      <!-- CONNECT PAGE -->
+       <div class="page" id="connectPage">
+        <button>Play</button>
+       </div>
+
+      <!-- SETTING PAGE -->
+      <div class="page" id="settingPage">
+        <h2>Settings</h2>
+
+        <div>
+          <div>
+            <label for="sensitivity-x-slider">Sensitivity X</label>
+            <input type="range" min="0" max="100" value="50" id="sensitivity-x-slider" name="sensitivity_x">
+            <p id="sensitivity-x-val"></p>
+          </div>
+
+          <div>
+            <label for="sensitivity-y-slider">Sensitivity Y</label>
+            <input type="range" min="0" max="100" value="50" id="sensitivity-y-slider" name="sensitivity_y">
+            <p id="sensitivity-y-val"></p>
+          </div>
+
+          <div>
+            <label for="invert-y">Invert Y</label>
+            <input type="checkbox" id="invert-y">
+          </div>
+
+          <div>
+            <label for="invert-x">Invert X</label>
+            <input type="checkbox" id="invert-x">
+          </div>
+
+          <div>
+            <h3>Keybinds</h3>
+            <p>IDK how this works yet, so I'll leave this for now, temporarily</p>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </body>
 </html>
