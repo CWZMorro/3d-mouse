@@ -1,68 +1,83 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="./src/style.css">
-    <script type="module" src="./src/main.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Gyromouse</title>
 
-  <body>
-    <div id="app">
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="./src/style.css">
+  <script type="module" src="./src/main.js"></script>
+</head>
 
-      <!-- MAIN PAGE -->
-      <div class="page active" id="mainPage">
-        <div>
-          <img src="./public/random_logo.png" id="banner" alt="random logo">
-          <h2 id="simple-intro">Welcome to 3D Gyromouse</h2>
-        </div>
-        <button id="connectBtn">Connect</button>
+<body>
+  <div id="app">
+    <img id="banner"
+      src="https://image.qwenlm.ai/public_source/01d1b333-f1ab-4ede-9121-c0d404af5566/1a638f813-a84c-4250-843d-7fec86271b52.png"
+      alt="3D Gyromouse Logo" />
+    <h1>3D Gyromouse</h1>
+    <p class="subtitle">Precision Motion Control</p>
+
+    <!-- Main Page -->
+    <div id="mainPage" class="page active">
+      <div class="button-group">
+        <button id="connectBtn" class="primary-btn">Connect</button>
         <button id="settingBtn">Settings</button>
       </div>
+    </div>
 
-      <!-- CONNECT PAGE -->
-       <div class="page" id="connectPage">
-        <button>Play</button>
-       </div>
+    <!-- Connect Page -->
+    <div id="connectPage" class="page">
+      <h2 class="page-title">Connect</h2>
+      <div class="card">
+        <div class="status-indicator">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Disconnected</span>
+        </div>
+        <button id="toggleConnectBtn" class="primary-btn">Connect Device</button>
+        <button id="connectToSettingBtn">Settings</button>
+      </div>
+      <button id="connectBackBtn" class="back-btn">← Back</button>
+    </div>
 
-      <!-- SETTING PAGE -->
-      <div class="page" id="settingPage">
-        <h2>Settings</h2>
-
-        <div>
-          <div>
-            <label for="sensitivity-x-slider">Sensitivity X</label>
-            <input type="range" min="0" max="100" value="50" id="sensitivity-x-slider" name="sensitivity_x">
-            <p id="sensitivity-x-val"></p>
+    <!-- Settings Page -->
+    <div id="settingPage" class="page">
+      <h2 class="page-title">Settings</h2>
+      <div class="card">
+        <div class="setting-group">
+          <div class="setting-row">
+            <span class="setting-label">Sensitivity X</span>
+            <span class="setting-value" id="sensitivity-x-val">50</span>
           </div>
-
-          <div>
-            <label for="sensitivity-y-slider">Sensitivity Y</label>
-            <input type="range" min="0" max="100" value="50" id="sensitivity-y-slider" name="sensitivity_y">
-            <p id="sensitivity-y-val"></p>
-          </div>
-
-          <div>
-            <label for="invert-y">Invert Y</label>
-            <input type="checkbox" id="invert-y">
-          </div>
-
-          <div>
-            <label for="invert-x">Invert X</label>
-            <input type="checkbox" id="invert-x">
-          </div>
-
-          <div>
-            <h3>Keybinds</h3>
-            <p>IDK how this works yet, so I'll leave this for now, temporarily</p>
-          </div>
+          <input type="range" id="sensitivity-x-slider" min="1" max="100" value="50" />
         </div>
 
-      </div>
+        <div class="setting-group">
+          <div class="setting-row">
+            <span class="setting-label">Sensitivity Y</span>
+            <span class="setting-value" id="sensitivity-y-val">50</span>
+          </div>
+          <input type="range" id="sensitivity-y-slider" min="1" max="100" value="50" />
+        </div>
 
+        <div class="setting-group">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <input type="checkbox" class="toggle-checkbox" id="invertX" />
+              <span>Invert X</span>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" class="toggle-checkbox" id="invertY" />
+              <span>Invert Y</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button id="settingBackBtn" class="back-btn">← Back</button>
     </div>
-  </body>
+    
+  </div>
+</body>
+
 </html>
