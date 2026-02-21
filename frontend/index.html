@@ -9,6 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="./src/style.css">
   <script type="module" src="./src/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -36,6 +37,13 @@
           <span id="statusText">Disconnected</span>
         </div>
         <button id="toggleConnectBtn" class="primary-btn">Connect Device</button>
+        
+        <div id="qrcode-section" class="qrcode-section hidden">
+          <p class="qrcode-label">Scan with your phone to connect</p>
+          <div id="qrcode-container"></div>
+          <p id="qrcode-url" class="qrcode-url"></p>
+        </div>
+
         <button id="connectToSettingBtn">Settings</button>
       </div>
       <button id="connectBackBtn" class="back-btn">← Back</button>

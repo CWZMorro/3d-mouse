@@ -60,21 +60,59 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 
 // Connect Toggle Functionality
 let isConnected = false;
+let qrcode = null;
+
+
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
 const statusText = document.getElementById("statusText");
 
+const qrcodeSection = document.getElementById("qrcode-section");
+const qrcodeContainer = document.getElementById("qrcode-container");
+const qrcodeUrl = document.getElementById("qrcode-url");
+
+function clearQRCode() {
+  if (qrcode) {
+    qrcode.clear();
+    qrcode = null;
+  }
+  qrcodeContainer.innerHTML = "";
+  qrcodeUrl.innerText = "";
+  qrcodeSection.classList.add("hidden");
+}
+
 toggleConnectBtn.addEventListener("click", () => {
   isConnected = !isConnected;
+
   if (isConnected) {
     toggleConnectBtn.innerText = "Disconnect";
-    toggleConnectBtn.style.background = "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)";
+    toggleConnectBtn.classList.add("diconnect-btn");
+    
+    // toggleConnectBtn.style.background = "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)";
     statusDot.classList.add("connected");
     statusText.innerText = "Connected";
+    
+    const roomId = Math.random().toString(36).substring(2,8);
+    const phoneUrl = `${window.location.origin}?room=${roomId}`;
+
+    qrcodeSection.classList.remove("hidden");
+    qrcode = new QRCode(qrcodeContainer, {
+      text: phoneUrl,
+      width: 256,
+      height: 256,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    qrcodeUrl.innerText = phoneUrl;
+    // WebSocket.emit('join-room', roomId);
+
   } else {
     toggleConnectBtn.innerText = "Connect Device";
-    toggleConnectBtn.style.background = "";
+    toggleConnectBtn.classList.remove("disconnect-btn");
     statusDot.classList.remove("connected");
     statusText.innerText = "Disconnected";
+    clearQRCode();
   }
 });
