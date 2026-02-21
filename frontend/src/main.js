@@ -1,9 +1,12 @@
-// import { io } from "../node_modules/socket.io-client";
+const socket = io(`http://${window.location.hostname}:3000`);
 
 const sx_slider = document.getElementById("sensitivity-x-slider");
 const sy_slider = document.getElementById("sensitivity-y-slider");
 const sx_label = document.getElementById("sensitivity-x-val");
 const sy_label = document.getElementById("sensitivity-y-val");
+
+const invertX = document.getElementById("invertX");
+const invertY = document.getElementById("invertY");
 
 // Initialize values
 sx_label.innerText = sx_slider.value;
@@ -11,11 +14,21 @@ sy_label.innerText = sy_slider.value;
 
 // Update values on input
 sx_slider.addEventListener("input", function() {
+  socket.emit('sensitivity-x', sx_slider.value);
   sx_label.innerText = sx_slider.value;
 });
 
 sy_slider.addEventListener("input", function() {
+  socket.emit('sensitivity-y', sy_slider.value);
   sy_label.innerText = sy_slider.value;
+});
+
+invertX.addEventListener("input", function() {
+  socket.emit('invert-x', invertX.value);
+});
+
+invertY.addEventListener("input", function() {
+  socket.emit('invert-y', invertY.value);
 });
 
 // Toggle checkbox styling
@@ -63,8 +76,6 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 // Connect Toggle Functionality
 let isConnected = false;
 let qrcode = null;
-
-const socket = io(`http://${window.location.hostname}:3000`);
 
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
