@@ -8,6 +8,7 @@
 
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="./src/style.css">
+  <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
   <script type="module" src="./src/main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
@@ -53,6 +54,7 @@
     <div id="settingPage" class="page">
       <h2 class="page-title">Settings</h2>
       <div class="card">
+
         <div class="setting-group">
           <div class="setting-row">
             <span class="setting-label">Sensitivity X</span>
@@ -81,9 +83,15 @@
             </label>
           </div>
         </div>
+        
       </div>
       <button id="settingBackBtn" class="back-btn">← Back</button>
     </div>
+
+    <!-- Room Page -->
+     <div id="roomPage" class="page">
+      <p id="roomID"></p>
+     </div>
     
   </div>
 </body>
