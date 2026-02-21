@@ -1,178 +1,44 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 320px;
-  min-height: 100vh;
-  padding: 1rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background-color: white; /* Ensure the iframe has a white background */
 }
 
-#app {
-  width: 100%;
-  max-width: 1280px;
-  min-height: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-#banner {
-  width: 150px;
-  height: auto;
-  margin: 0 auto 1.5rem;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 8px 25px rgba(100, 108, 255, 0.3);
-  transition: transform 0.3s ease;
-}
-
-#banner:hover {
-  transform: scale(1.05);
-}
-
-@media screen and (max-width: 480px) {
-  #banner {
-    width: 80%;
-    height: auto;
-  }
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-.page {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.page.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-
-
-.card {
-  background: rgba(255,255,255,0.08);
-  padding: 2rem;
-  border-radius: 16px;
-  margin: 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.setting-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  transition: all 0.2s ease;
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-button:hover {
-  transform: translateY(-2px);
-}
-
-.primary-btn {
-  background: #646cff;
-  color: white;
-}
-
-.primary-btn:hover {
-  background: #535bf2;
-}
-
-.back-btn {
-  margin-top: 1.5rem;
-  background: transparent;
-  border: 1px solid #646cff;
-} */
 :root {
+  /* Dark Theme (Default) */
+  --color-primary: #646cff;
+  --color-primary-dark: #535bf2;
+  --color-primary-darker: #4344e1;
+  --color-secondary: #a855f7;
+  --color-background: #1a1a2e;
+  --color-background-gradient-1: #1a1a2e;
+  --color-background-gradient-2: #16213e;
+  --color-background-gradient-3: #0f3460;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-surface-hover: rgba(255, 255, 255, 0.08);
+  --color-surface-active: rgba(100, 108, 255, 0.3);
+  --color-surface-hover-accent: rgba(100, 108, 255, 0.2);
+  --color-text-primary: rgba(255, 255, 255, 0.87);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-text-muted: rgba(255, 255, 255, 0.9);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: #646cff;
+  --color-button-bg: #1a1a1a;
+  --color-button-text: rgba(255, 255, 255, 0.87);
+  --color-status-connected: #22c55e;
+  --color-status-disconnected: #ef4444;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-accent: rgba(100, 108, 255, 0.3);
+  --color-range-bg: rgba(255, 255, 255, 0.1);
+  --color-range-thumb: #646cff;
+  --color-back-btn-bg: transparent;
+  --color-back-btn-text: #646cff;
+  --color-back-btn-hover: rgba(100, 108, 255, 0.1);
+  
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -181,14 +47,47 @@ button:hover {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Light Theme */
+    --color-primary: #535bf2;
+    --color-primary-dark: #4344e1;
+    --color-primary-darker: #3333d0;
+    --color-secondary: #8b3dff;
+    --color-background: #f0f2f5;
+    --color-background-gradient-1: #e8ebf0;
+    --color-background-gradient-2: #d9def0;
+    --color-background-gradient-3: #c5cce8;
+    --color-surface: rgba(255, 255, 255, 0.8);
+    --color-surface-hover: rgba(255, 255, 255, 0.95);
+    --color-surface-active: rgba(83, 91, 242, 0.15);
+    --color-surface-hover-accent: rgba(83, 91, 242, 0.1);
+    --color-text-primary: #213547;
+    --color-text-secondary: #5a6b7c;
+    --color-text-muted: #2d3e50;
+    --color-border: rgba(0, 0, 0, 0.1);
+    --color-border-hover: #535bf2;
+    --color-button-bg: #ffffff;
+    --color-button-text: #213547;
+    --color-status-connected: #16a34a;
+    --color-status-disconnected: #dc2626;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-shadow-accent: rgba(83, 91, 242, 0.2);
+    --color-range-bg: rgba(0, 0, 0, 0.1);
+    --color-range-thumb: #535bf2;
+    --color-back-btn-bg: transparent;
+    --color-back-btn-text: #535bf2;
+    --color-back-btn-hover: rgba(83, 91, 242, 0.1);
+    
+    color-scheme: light;
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
   }
+  
   a:hover {
-    color: #747bff;
+    color: var(--color-primary);
   }
+  
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-button-bg);
   }
 }
 
@@ -206,7 +105,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(135deg, var(--color-background-gradient-1) 0%, var(--color-background-gradient-2) 50%, var(--color-background-gradient-3) 100%);
+  transition: background 0.3s ease;
 }
 
 #app {
@@ -215,16 +115,18 @@ body {
   min-height: 600px;
   margin: 0 auto;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px var(--color-shadow);
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 #banner {
@@ -233,8 +135,9 @@ body {
   margin: 0 auto 1.5rem;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 8px 25px rgba(100, 108, 255, 0.3);
+  box-shadow: 0 8px 25px var(--color-shadow-accent);
   transition: transform 0.3s ease;
+  border: 3px solid var(--color-border);
 }
 
 #banner:hover {
@@ -245,14 +148,14 @@ h1 {
   font-size: 2.5rem;
   line-height: 1.1;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #646cff 0%, #a855f7 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .subtitle {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-secondary);
   margin-bottom: 2rem;
   font-size: 1rem;
 }
@@ -280,7 +183,7 @@ h1 {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-surface-hover);
   padding: 2rem;
   border-radius: 16px;
   margin: 1.5rem 0;
@@ -289,7 +192,8 @@ h1 {
   gap: 1rem;
   width: 100%;
   max-width: 400px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .button-group {
@@ -312,7 +216,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .setting-row:last-child {
@@ -321,12 +225,12 @@ h1 {
 
 .setting-label {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text-muted);
 }
 
 .setting-value {
   font-size: 1rem;
-  color: #646cff;
+  color: var(--color-primary);
   font-weight: 600;
   min-width: 60px;
   text-align: right;
@@ -336,7 +240,7 @@ input[type="range"] {
   width: 100%;
   height: 8px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-range-bg);
   outline: none;
   -webkit-appearance: none;
   appearance: none;
@@ -348,7 +252,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #646cff;
+  background: var(--color-range-thumb);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -361,7 +265,7 @@ input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #646cff;
+  background: var(--color-range-thumb);
   cursor: pointer;
   border: none;
   transition: transform 0.2s ease;
@@ -383,25 +287,26 @@ input[type="range"]::-moz-range-thumb:hover {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: 1px solid var(--color-border);
 }
 
 .toggle-item:hover {
-  background: rgba(100, 108, 255, 0.2);
+  background: var(--color-surface-hover-accent);
 }
 
 .toggle-item.active {
-  background: rgba(100, 108, 255, 0.3);
-  border: 1px solid #646cff;
+  background: var(--color-surface-active);
+  border: 1px solid var(--color-primary);
 }
 
 .toggle-checkbox {
   width: 18px;
   height: 18px;
-  accent-color: #646cff;
+  accent-color: var(--color-primary);
 }
 
 button {
@@ -411,17 +316,17 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
   cursor: pointer;
   transition: all 0.25s ease;
   width: 100%;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-border-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(100, 108, 255, 0.3);
+  box-shadow: 0 4px 15px var(--color-shadow-accent);
 }
 
 button:focus,
@@ -430,31 +335,31 @@ button:focus-visible {
 }
 
 .primary-btn {
-  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: white;
   border: none;
 }
 
 .primary-btn:hover {
-  background: linear-gradient(135deg, #535bf2 0%, #4344e1 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker) 100%);
 }
 
 .back-btn {
   margin-top: 1.5rem;
-  background: transparent;
-  border: 1px solid #646cff;
-  color: #646cff;
+  background: var(--color-back-btn-bg);
+  border: 1px solid var(--color-back-btn-text);
+  color: var(--color-back-btn-text);
   max-width: 200px;
 }
 
 .back-btn:hover {
-  background: rgba(100, 108, 255, 0.1);
+  background: var(--color-back-btn-hover);
 }
 
 .page-title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text-muted);
 }
 
 .status-indicator {
@@ -464,20 +369,21 @@ button:focus-visible {
   gap: 0.5rem;
   margin: 1rem 0;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface);
   border-radius: 8px;
+  border: 1px solid var(--color-border);
 }
 
 .status-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ef4444;
+  background: var(--color-status-disconnected);
   animation: pulse 2s infinite;
 }
 
 .status-dot.connected {
-  background: #22c55e;
+  background: var(--color-status-connected);
 }
 
 @keyframes pulse {
@@ -496,20 +402,20 @@ button:focus-visible {
     min-height: 500px;
     border-radius: 16px;
   }
-
+  
   h1 {
     font-size: 2rem;
   }
-
+  
   #banner {
     width: 120px;
     height: 120px;
   }
-
+  
   .card {
     padding: 1.5rem;
   }
-
+  
   .page {
     padding: 1.5rem;
   }
@@ -522,73 +428,73 @@ button:focus-visible {
     align-items: flex-start;
     padding-top: 1rem;
   }
-
+  
   #app {
     padding: 1rem;
     min-height: auto;
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px var(--color-shadow);
   }
-
+  
   #banner {
     width: 80px;
     height: 80px;
     margin-bottom: 1rem;
   }
-
+  
   h1 {
     font-size: 1.5rem;
   }
-
+  
   .subtitle {
     font-size: 0.875rem;
     margin-bottom: 1.5rem;
   }
-
+  
   .card {
     padding: 1rem;
     margin: 1rem 0;
     border-radius: 12px;
   }
-
+  
   .page {
     padding: 1rem;
   }
-
+  
   .page-title {
     font-size: 1.4rem;
     margin-bottom: 1rem;
   }
-
+  
   button {
     padding: 0.6em 1em;
     font-size: 0.9em;
   }
-
+  
   .button-group {
     max-width: 100%;
   }
-
+  
   .setting-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-
+  
   .setting-value {
     text-align: left;
   }
-
+  
   .toggle-group {
     flex-direction: column;
     gap: 0.5rem;
   }
-
+  
   .toggle-item {
     width: 100%;
     justify-content: center;
   }
-
+  
   .back-btn {
     max-width: 100%;
     margin-top: 1rem;
@@ -600,16 +506,16 @@ button:focus-visible {
   #app {
     padding: 0.75rem;
   }
-
+  
   h1 {
     font-size: 1.3rem;
   }
-
+  
   #banner {
     width: 60px;
     height: 60px;
   }
-
+  
   .card {
     padding: 0.75rem;
   }
@@ -621,21 +527,21 @@ button:focus-visible {
     min-height: auto;
     padding: 1rem;
   }
-
+  
   .page {
     padding: 1rem;
   }
-
+  
   h1 {
     font-size: 1.5rem;
   }
-
+  
   #banner {
     width: 60px;
     height: 60px;
     margin-bottom: 0.5rem;
   }
-
+  
   .card {
     padding: 1rem;
     margin: 0.5rem 0;
