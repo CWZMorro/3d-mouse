@@ -1,13 +1,91 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Gyromouse</title>
+
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="./src/style.css">
+  <script type="module" src="./src/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <img id="banner"
+      src="https://image.qwenlm.ai/public_source/01d1b333-f1ab-4ede-9121-c0d404af5566/1a638f813-a84c-4250-843d-7fec86271b52.png"
+      alt="3D Gyromouse Logo" />
+    <h1>3D Gyromouse</h1>
+    <p class="subtitle">Precision Motion Control</p>
+
+    <!-- Main Page -->
+    <div id="mainPage" class="page active">
+      <div class="button-group">
+        <button id="connectBtn" class="primary-btn">Connect</button>
+        <button id="settingBtn">Settings</button>
+      </div>
+    </div>
+
+    <!-- Connect Page -->
+    <div id="connectPage" class="page">
+      <h2 class="page-title">Connect</h2>
+      <div class="card">
+        <div class="status-indicator">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Disconnected</span>
+        </div>
+        <button id="toggleConnectBtn" class="primary-btn">Connect Device</button>
+        
+        <div id="qrcode-section" class="qrcode-section hidden">
+          <p class="qrcode-label">Scan with your phone to connect</p>
+          <div id="qrcode-container"></div>
+          <p id="qrcode-url" class="qrcode-url"></p>
+        </div>
+
+        <button id="connectToSettingBtn">Settings</button>
+      </div>
+      <button id="connectBackBtn" class="back-btn">← Back</button>
+    </div>
+
+    <!-- Settings Page -->
+    <div id="settingPage" class="page">
+      <h2 class="page-title">Settings</h2>
+      <div class="card">
+        <div class="setting-group">
+          <div class="setting-row">
+            <span class="setting-label">Sensitivity X</span>
+            <span class="setting-value" id="sensitivity-x-val">50</span>
+          </div>
+          <input type="range" id="sensitivity-x-slider" min="1" max="100" value="50" />
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-row">
+            <span class="setting-label">Sensitivity Y</span>
+            <span class="setting-value" id="sensitivity-y-val">50</span>
+          </div>
+          <input type="range" id="sensitivity-y-slider" min="1" max="100" value="50" />
+        </div>
+
+        <div class="setting-group">
+          <div class="toggle-group">
+            <label class="toggle-item">
+              <input type="checkbox" class="toggle-checkbox" id="invertX" />
+              <span>Invert X</span>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" class="toggle-checkbox" id="invertY" />
+              <span>Invert Y</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button id="settingBackBtn" class="back-btn">← Back</button>
+    </div>
+    
+  </div>
+</body>
+
 </html>
