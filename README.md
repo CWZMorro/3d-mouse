@@ -37,7 +37,6 @@ Open your terminal in both the `frontend` and `backend` directories and run the 
 Run this in both frontend and backend folders
 ```
 pnpm i
-
 ```
 
 ### 2. Start the Backend server
@@ -57,7 +56,6 @@ Before starting the main frontend development server, you need to set up the tun
 2. Run the tunnel command:
 ```
 pnpm tunnel
-
 ```
 
 
@@ -71,7 +69,6 @@ Below is the image when it has been successfully installed:
 2. Finally, start the frontend server:
 ```
 pnpm run dev
-
 ```
 
 
