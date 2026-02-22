@@ -7,11 +7,11 @@ A web-based 3D mouse that utilizes your smartphone's gyroscope feature to contro
 
 | Home Page |
 |:--------:|
-| <img src="./readme_images/laptop_index.png" width=500> |
+| <img src="./readme_images/laptop_index1.png" width=500> |
 
 | QR Code Generation |
 |:--------:|
-| <img src="./readme_images/laptop_qr.png" width=500> |
+| <img src="./readme_images/laptop_qr1.png" width=500> |
 
 ---
 
