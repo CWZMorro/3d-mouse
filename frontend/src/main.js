@@ -64,12 +64,7 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 let isConnected = false;
 let qrcode = null;
 
-const socket = io("https://3d-mouse.loca.lt", {
-  extraHeaders: {
-    "Bypass-Tunnel-Reminder": "true"
-  }
-});
-
+const socket = io();
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
 const statusText = document.getElementById("statusText");

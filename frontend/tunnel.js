@@ -1,16 +1,13 @@
-import localtunnel from 'localtunnel';
+import { startTunnel } from 'untun';
 
 (async function() {
   try {
-    const tunnel = await localtunnel({ port: 5173, subdomain: '3d-mouse-ui' }); 
+    const tunnel = await startTunnel({ port: 5173 });
+    const url = await tunnel.getURL();
     console.log('------------------------------------------');
-    console.log(`🚀 FRONTEND TUNNEL: ${tunnel.url}`);
+    console.log(`🚀 FRONTEND TUNNEL: ${url}`);
     console.log('------------------------------------------');
-
-    tunnel.on('close', () => {
-      console.log('Tunnel closed.');
-    });
   } catch (err) {
-    console.error('Localtunnel Frontend Error:', err);
+    console.error('Frontend Tunnel Error:', err);
   }
 })();
