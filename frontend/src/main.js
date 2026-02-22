@@ -64,7 +64,7 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 let isConnected = false;
 let qrcode = null;
 
-const socket = io(`wss://investigated-wilderness-bloom-proposition.trycloudflare.com`, {
+const socket = io(`exanimate-nondexterously-ernest.ngrok-free.dev`, {
   transports: ["websocket"]
 });
 
