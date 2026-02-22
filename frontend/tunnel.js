@@ -1,12 +1,16 @@
-import ngrok from 'ngrok';
+import localtunnel from 'localtunnel';
 
 (async function() {
   try {
-    const url = await ngrok.connect(5173); 
+    const tunnel = await localtunnel({ port: 5173, subdomain: '3d-mouse-ui' }); 
     console.log('------------------------------------------');
-    console.log(`🚀 FRONTEND TUNNEL: ${url}`);
+    console.log(`🚀 FRONTEND TUNNEL: ${tunnel.url}`);
     console.log('------------------------------------------');
+
+    tunnel.on('close', () => {
+      console.log('Tunnel closed.');
+    });
   } catch (err) {
-    console.error('Ngrok Frontend Error:', err);
+    console.error('Localtunnel Frontend Error:', err);
   }
 })();

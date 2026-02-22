@@ -64,7 +64,11 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 let isConnected = false;
 let qrcode = null;
 
-const socket = io(`https://investigated-wilderness-bloom-proposition.trycloudflare.com`);
+const socket = io("https://3d-mouse.loca.lt", {
+  extraHeaders: {
+    "Bypass-Tunnel-Reminder": "true"
+  }
+});
 
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
@@ -112,7 +116,7 @@ toggleConnectBtn.addEventListener("click", () => {
 
   if (isConnected) {
     toggleConnectBtn.innerText = "Disconnect";
-    toggleConnectBtn.classList.add("diconnect-btn");
+    toggleConnectBtn.classList.add("disconnect-btn");
 
     statusDot.classList.add("connected");
     statusText.innerText = "Connected";

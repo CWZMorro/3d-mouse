@@ -47,7 +47,7 @@ server.listen(PORT, async () => {
   console.log(`Server locally running at http://localhost:${PORT}`);
 
   try {
-    const tunnel = await localtunnel({ port: PORT });
+    const tunnel = await localtunnel({ port: PORT, subdomain: '3d-mouse' });
     
     console.log(`--------------------------------------------------`);
     console.log(`PUBLIC TUNNEL: ${tunnel.url}`);
