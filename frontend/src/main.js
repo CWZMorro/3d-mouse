@@ -3,6 +3,9 @@ const sy_slider = document.getElementById("sensitivity-y-slider");
 const sx_label = document.getElementById("sensitivity-x-val");
 const sy_label = document.getElementById("sensitivity-y-val");
 
+const invertX = document.getElementById("invertX");
+const invertY = document.getElementById("invertY");
+
 const canvas = document.getElementById('gridCanvas');
 const ctx = canvas.getContext('2d');
 const socket = io();

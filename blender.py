@@ -26,6 +26,24 @@ class WEB_OT_UDP_Receiver(bpy.types.Operator):
             return diff + deadzone
         return 0.0
 
+    _center_alpha = None
+    _center_beta = None
+    _center_gamma = None
+    _deadzone = 8.0
+
+    def get_shortest_angle_diff(self, target, current):
+        """Forces the angle difference to take the shortest path (-180 to 180) to fix the 360 wraparound."""
+        return (target - current + 180) % 360 - 180
+
+    def apply_deadzone(self, diff, deadzone):
+        """Smoothly clamps values within the deadzone to 0."""
+        if diff > deadzone:
+            return diff - deadzone
+        elif diff < -deadzone:
+            return diff + deadzone
+        else:
+            return 0.0
+
     def modal(self, context, event):
         if event.type == "TIMER":
             try:
@@ -133,8 +151,10 @@ class WEB_OT_UDP_Receiver(bpy.types.Operator):
         context.window_manager.event_timer_remove(self._timer)
         if self._sock: self._sock.close()
 
+
 def register():
     bpy.utils.register_class(WEB_OT_UDP_Receiver)
+
 
 if __name__ == "__main__":
     register()

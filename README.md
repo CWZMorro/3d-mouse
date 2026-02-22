@@ -3,8 +3,23 @@
 A web-based 3D mouse that utilizes your smartphone's gyroscope feature to control your 3D environment in 3D environment.
 
 ## 📸 Interface Overview
+## Computer's Interface
 
-INSERT_IMAGE_FOR_WEB_APP_INTERFACE
+| Home Page |
+|:--------:|
+| <img src="./readme_images/laptop_index.png" width=500> |
+
+| QR Code Generation |
+|:--------:|
+| <img src="./readme_images/laptop_qr.png" width=500> |
+
+---
+
+## Phone's Interface
+
+| Interactive Panel | Settings |
+|:--------:|:--------:|
+| <img src="./readme_images/phone_touchpad.jpg" width=250> | <img src="./readme_images/phone_settings.jpg" width=250> |
 
 ## ✨ Features
 
@@ -50,10 +65,10 @@ pnpm tunnel
 
 Below is the image when it has been successfully installed:
 
-INSERT_IMAGE_FOR WHEN_IT'S_SUCCESSFULLY_INSTALLED
+<br><br><img src="./readme_images/pnpm_tunnel.png"><br><br>
 
-4. Once completed, press `Ctrl + C` to terminate the tunnel process.
-5. Finally, start the frontend server:
+1. Once completed, press `Ctrl + C` to terminate the tunnel process.
+2. Finally, start the frontend server:
 ```
 pnpm run dev
 
