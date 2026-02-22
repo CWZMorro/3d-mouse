@@ -10,17 +10,17 @@ sx_label.innerText = sx_slider.value;
 sy_label.innerText = sy_slider.value;
 
 // Update values on input
-sx_slider.addEventListener("input", function() {
+sx_slider.addEventListener("input", function () {
   sx_label.innerText = sx_slider.value;
 });
 
-sy_slider.addEventListener("input", function() {
+sy_slider.addEventListener("input", function () {
   sy_label.innerText = sy_slider.value;
 });
 
 // Toggle checkbox styling
 document.querySelectorAll('.toggle-checkbox').forEach(checkbox => {
-  checkbox.addEventListener('change', function() {
+  checkbox.addEventListener('change', function () {
     this.parentElement.classList.toggle('active', this.checked);
   });
 });
@@ -64,7 +64,9 @@ document.getElementById("settingBackBtn").addEventListener("click", () => {
 let isConnected = false;
 let qrcode = null;
 
-const socket = io(`http://${window.location.hostname}:3000`);
+const socket = io(`wss://investigated-wilderness-bloom-proposition.trycloudflare.com`, {
+  transports: ["websocket"]
+});
 
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
 const statusDot = document.getElementById("statusDot");
@@ -84,9 +86,27 @@ if (roomId) {
     console.log("Received rotation: ", data);
   });
   showPage('roomPage');
-  
+
   const roomID = document.getElementById("roomID");
   roomID.innerHTML = `The current room ID is ${roomId}`;
+
+  const startSensors = async () => {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      const response = await DeviceOrientationEvent.requestPermission();
+      if (response !== 'granted') return;
+    }
+
+    window.addEventListener('deviceorientation', (event) => {
+      socket.emit('gyro-data', {
+        roomId: roomId,
+        alpha: event.alpha,
+        beta: event.beta,
+        gamma: event.gamma
+      });
+    });
+  };
+
+  document.body.addEventListener('click', startSensors, { once: true });
 }
 
 toggleConnectBtn.addEventListener("click", () => {
@@ -95,11 +115,11 @@ toggleConnectBtn.addEventListener("click", () => {
   if (isConnected) {
     toggleConnectBtn.innerText = "Disconnect";
     toggleConnectBtn.classList.add("diconnect-btn");
-    
+
     statusDot.classList.add("connected");
     statusText.innerText = "Connected";
-    
-    const roomId = Math.random().toString(36).substring(2,8);
+
+    const roomId = Math.random().toString(36).substring(2, 8);
     const phoneUrl = `${window.location.origin}?room=${roomId}`;
 
     qrcodeSection.classList.remove("hidden");
@@ -132,4 +152,3 @@ function clearQRCode() {
   qrcodeUrl.innerText = "";
   qrcodeSection.classList.add("hidden");
 }
-
