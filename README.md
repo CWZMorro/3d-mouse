@@ -1,6 +1,6 @@
 # 40percent-online_3DMouse
 
-A web-based 3D mouse that utilizes your smartphone's gyroscope feature to control your 3D environment in Blender. 
+A web-based 3D mouse that utilizes your smartphone's gyroscope feature to control your 3D environment in 3D environment.
 
 ## 📸 Interface Overview
 
