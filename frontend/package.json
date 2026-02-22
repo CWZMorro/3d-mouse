@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "vite": "vite",
+    "tunnel": "node tunnel.js",
+    "dev": "concurrently \"pnpm vite\" \"pnpm tunnel\"",
     "build": "vite build",
     "preview": "vite preview"
   },

@@ -1,3 +1,4 @@
+const localtunnel = require('localtunnel');
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -42,6 +43,21 @@ io.on('connection', (socket) => {
 });
 
 const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+server.listen(PORT, async () => {
+  console.log(`Server locally running at http://localhost:${PORT}`);
+
+  try {
+    const tunnel = await localtunnel({ port: PORT });
+    
+    console.log(`--------------------------------------------------`);
+    console.log(`PUBLIC TUNNEL: ${tunnel.url}`);
+    console.log(`--------------------------------------------------`);
+
+    tunnel.on('close', () => {
+      console.log('Tunnel closed.');
+    });
+
+  } catch (err) {
+    console.error('Error starting localtunnel:', err);
+  }
 });
