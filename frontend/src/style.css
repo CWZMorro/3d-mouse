@@ -19,7 +19,11 @@
 html,
 body,
 #app {
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -164,9 +168,9 @@ button:hover {
 
 .mode-selector {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  background: #111; /* Dark background */
+  background: #111;
 }
 
 .mode-item {
@@ -189,7 +193,7 @@ button:hover {
 .mode-item .icon svg {
   width: 28px;
   height: 28px;
-  color: #ffffff; /* Makes the stroke-current color white */
+  color: #ffffff;
   display: block;
 }
 
@@ -197,7 +201,7 @@ button:hover {
   width: 28px;
   height: 28px;
   object-fit: contain;
-  filter: invert(1); /* Turns black PNG to white */
+  filter: invert(1);
 }
 
 .canvas-container {
@@ -290,4 +294,50 @@ input[type="range"]::-webkit-slider-thumb:active {
 
 .mono {
   font-family: "JetBrains Mono", monospace;
+}
+
+#brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  #setupContainer {
+    max-width: 800px;
+    justify-content: flex-start;
+    padding-top: 24px;
+  }
+
+  #brand-header {
+    flex-direction: row;
+    width: 100%;
+    text-align: left;
+    padding-bottom: 24px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  #banner {
+    margin-bottom: 0;
+    margin-right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .brand-text h1 {
+    margin-bottom: 4px;
+    font-size: 1.75rem;
+  }
+
+  .brand-text .subtitle {
+    margin-bottom: 0;
+  }
+
+  .page {
+    max-width: 400px;
+    margin: auto;
+  }
 }
