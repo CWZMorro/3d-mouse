@@ -1,4 +1,3 @@
-// --- Elements & State ---
 const sx_slider = document.getElementById("sensitivity-x-slider");
 const sy_slider = document.getElementById("sensitivity-y-slider");
 const sx_label = document.getElementById("sensitivity-x-val");
@@ -6,27 +5,20 @@ const sy_label = document.getElementById("sensitivity-y-val");
 
 const canvas = document.getElementById('gridCanvas');
 const ctx = canvas.getContext('2d');
-
 const socket = io();
-let currentMode = 'rotate'; 
-let mouseIsDown = false;
-let previousPage = "mainPage";
 
+let currentMode = 'viewport_touch'; 
+let previousPage = "mainPage";
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get('room');
 
-// --- Initialization ---
 sx_label.innerText = sx_slider.value;
 sy_label.innerText = sy_slider.value;
-
-// --- Sliders ---
 sx_slider.addEventListener("input", () => sx_label.innerText = sx_slider.value);
 sy_slider.addEventListener("input", () => sy_label.innerText = sy_slider.value);
 
-// --- Navigation ---
 function showPage(pageID) {
-  const pages = document.querySelectorAll('.page');
-  pages.forEach(page => page.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
   document.getElementById(pageID).classList.add('active');
   
   const setupContainer = document.getElementById('setupContainer');
@@ -43,7 +35,6 @@ document.getElementById("settingBtn").addEventListener("click", () => { previous
 document.getElementById("connectBackBtn").addEventListener("click", () => showPage("mainPage"));
 document.getElementById("settingBackBtn").addEventListener("click", () => showPage(previousPage));
 
-// --- Canvas Drawing ---
 function resizeCanvas() {
   if (!canvas || !canvas.parentElement) return;
   canvas.width = canvas.parentElement.clientWidth;
@@ -53,7 +44,7 @@ window.addEventListener('resize', resizeCanvas);
 
 function drawUI(alpha = 0, beta = 0) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = '#222'; // Subtle grid color
+  ctx.strokeStyle = '#222';
   ctx.lineWidth = 1;
 
   const step = 45;
@@ -70,12 +61,11 @@ function drawUI(alpha = 0, beta = 0) {
   ctx.stroke();
 }
 
-// --- Interaction & Modes ---
 document.querySelectorAll('.mode-item').forEach(item => {
   item.addEventListener('click', () => {
-    const mode = item.getAttribute('data-mode');
+    const rawMode = item.getAttribute('data-mode');
     
-    if (mode === 'settings') {
+    if (rawMode === 'settings') {
       previousPage = 'roomPage';
       showPage('settingPage');
       return;
@@ -83,56 +73,102 @@ document.querySelectorAll('.mode-item').forEach(item => {
 
     document.querySelectorAll('.mode-item').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
-    currentMode = mode;
-
-    // Trigger immediate "Next Object" action for Select mode
-    if (currentMode === 'select') {
-      socket.emit('gyro-data', { roomId, action: 'next_object' });
-    }
+    
+    if (rawMode === 'rotate') currentMode = 'viewport_touch';
+    if (rawMode === 'zoom') currentMode = 'object_touch';
+    if (rawMode === 'select') currentMode = 'gyro_control';
   });
 });
 
-window.addEventListener('touchstart', () => mouseIsDown = true);
-window.addEventListener('touchend', () => mouseIsDown = false);
-window.addEventListener('mousedown', () => mouseIsDown = true);
-window.addEventListener('mouseup', () => mouseIsDown = false);
+let lastTouch = null;
 
-// --- Sensor Connection ---
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  if (e.touches.length === 1) {
+    lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  } else if (e.touches.length === 2) {
+    let dx = e.touches[1].clientX - e.touches[0].clientX;
+    let dy = e.touches[1].clientY - e.touches[0].clientY;
+    lastTouch = {
+      x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+      y: (e.touches[0].clientY + e.touches[1].clientY) / 2,
+      dist: Math.hypot(dx, dy),
+      angle: Math.atan2(dy, dx)
+    };
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (!lastTouch) return;
+
+  let payload = { roomId, mode: currentMode, touches: e.touches.length };
+
+  if (e.touches.length === 1 && currentMode !== 'gyro_control') {
+    payload.dx = e.touches[0].clientX - lastTouch.x;
+    payload.dy = e.touches[0].clientY - lastTouch.y;
+    lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    socket.emit('gyro-data', payload);
+  } else if (e.touches.length === 2) {
+    let dx = e.touches[1].clientX - e.touches[0].clientX;
+    let dy = e.touches[1].clientY - e.touches[0].clientY;
+    let cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    let cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    let dist = Math.hypot(dx, dy);
+    let angle = Math.atan2(dy, dx);
+
+    let twist = angle - lastTouch.angle;
+    if (twist > Math.PI) twist -= 2 * Math.PI;
+    if (twist < -Math.PI) twist += 2 * Math.PI;
+
+    payload.dx = cx - lastTouch.x;
+    payload.dy = cy - lastTouch.y;
+    payload.zoomDelta = dist - lastTouch.dist;
+    payload.twistDelta = twist;
+
+    lastTouch = { x: cx, y: cy, dist: dist, angle: angle };
+    socket.emit('gyro-data', payload);
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchend', (e) => {
+  if (e.touches.length === 0) lastTouch = null;
+  else if (e.touches.length === 1) {
+    lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }
+});
+
 if (roomId) {
   socket.emit('join-room', roomId);
   showPage('roomPage');
   document.getElementById("roomID").innerText = roomId;
 
   const startSensors = async () => {
-    // Permission request for iOS devices
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
       const response = await DeviceOrientationEvent.requestPermission();
       if (response !== 'granted') return;
     }
 
     window.addEventListener('deviceorientation', (event) => {
-      // Screen press overrides current mode to 'zoom'
-      const activeMode = mouseIsDown ? 'zoom' : currentMode;
-      
       drawUI(event.alpha, event.beta);
-
-      socket.emit('gyro-data', {
-        roomId: roomId,
-        mode: activeMode,
-        alpha: event.alpha,
-        beta: event.beta,
-        gamma: event.gamma,
-        isPressed: mouseIsDown,
-        sensX: parseFloat(sx_slider.value),
-        sensY: parseFloat(sy_slider.value)
-      });
+      
+      if (currentMode === 'gyro_control') {
+        socket.emit('gyro-data', {
+          roomId: roomId,
+          mode: 'gyro_control',
+          alpha: event.alpha,
+          beta: event.beta,
+          gamma: event.gamma,
+          sensX: parseFloat(sx_slider.value),
+          sensY: parseFloat(sy_slider.value)
+        });
+      }
     });
   };
 
   document.body.addEventListener('click', startSensors, { once: true });
 }
 
-// --- QR Setup (Laptop side) ---
 let isConnected = false;
 let qrcode = null;
 const toggleConnectBtn = document.getElementById("toggleConnectBtn");
