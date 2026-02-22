@@ -21,8 +21,6 @@ Open your terminal in both the `frontend` and `backend` directories and run the 
 
 Run this in both frontend and backend folders
 ```
-npm i
-# OR
 pnpm i
 
 ```
@@ -33,8 +31,6 @@ Navigate to the `backend` directory and start the web app:
 
 ```
 pnpm dev
-# OR
-npm dev
 
 ```
 
@@ -45,8 +41,6 @@ Before starting the main frontend development server, you need to set up the tun
 1. Navigate to the `frontend` folder.
 2. Run the tunnel command:
 ```
-npm tunnel
-# OR
 pnpm tunnel
 
 ```
@@ -62,8 +56,6 @@ INSERT_IMAGE_FOR WHEN_IT'S_SUCCESSFULLY_INSTALLED
 5. Finally, start the frontend server:
 ```
 pnpm run dev
-# OR
-npm run dev
 
 ```
 
