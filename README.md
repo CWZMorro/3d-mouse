@@ -45,7 +45,6 @@ Navigate to the `backend` directory and start the web app:
 
 ```
 pnpm dev
-
 ```
 
 ### 3. Start the Frontend server
