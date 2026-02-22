@@ -65,7 +65,7 @@ pnpm tunnel
 
 Below is the image when it has been successfully installed:
 
-<br><br><img src="./readme_images/pnpm_tunnel.png"><br><br>
+<br><br><img src="./readme_images/pnpm_tunnel.jpg"><br><br>
 
 1. Once completed, press `Ctrl + C` to terminate the tunnel process.
 2. Finally, start the frontend server:
