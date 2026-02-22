@@ -5,8 +5,8 @@ A web-based 3D mouse that utilizes your smartphone's gyroscope feature to contro
 ## 📸 Interface Overview
 | <p style="text-align: center;">Computer's Interface</p> | <p style="text-align: center;">Phone's Interface</p> |
 |-|-|
-|<img src="../readme_images/laptop_index.png"><br><p style="text-align: center;">Home Page</p>|<img src="../readme_images/phone_touchpad.jpg"><br><p style="text-align: center;">Interactive Panel</p>|
-|<img src="../readme_images/laptop_qr.png"><br><p style="text-align: center;">QR code generation</p>|<img src="../readme_images/phone_settings.jpg"><br><p style="text-align: center;">Settings</p>
+|<img src="./readme_images/laptop_index.png"><br><p style="text-align: center;">Home Page</p>|<img src="./readme_images/phone_touchpad.jpg"><br><p style="text-align: center;">Interactive Panel</p>|
+|<img src="./readme_images/laptop_qr.png"><br><p style="text-align: center;">QR code generation</p>|<img src="./readme_images/phone_settings.jpg"><br><p style="text-align: center;">Settings</p>
 
 ## ✨ Features
 
