@@ -19,7 +19,7 @@ A web-based 3D mouse that utilizes your smartphone's gyroscope feature to contro
 
 | Interactive Panel | Settings |
 |:--------:|:--------:|
-| <img src="./readme_images/phone_touchpad.jpg" width=250> | <img src="./readme_images/phone_settings.jpg" width=250> |
+| <img src="./readme_images/phone_touchpad.png" width=250> | <img src="./readme_images/phone_settings.png" width=250> |
 
 ## ✨ Features
 
