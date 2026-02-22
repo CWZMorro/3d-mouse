@@ -76,12 +76,17 @@ const qrcodeUrl = document.getElementById("qrcode-url");
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get('room');
 
-// the link with roomID joins the room through the socket
+let mouseIsDown = false;
+let currentMode = 'rotate'; // Default mode
+
+// Track if the user is touching the screen
+window.addEventListener('mousedown', () => mouseIsDown = true);
+window.addEventListener('mouseup', () => mouseIsDown = false);
+window.addEventListener('touchstart', () => mouseIsDown = true);
+window.addEventListener('touchend', () => mouseIsDown = false);
+
 if (roomId) {
   socket.emit('join-room', roomId);
-  socket.on('update-rotation', (data) => {
-    console.log("Received rotation: ", data);
-  });
   showPage('roomPage');
 
   const roomID = document.getElementById("roomID");
@@ -94,11 +99,19 @@ if (roomId) {
     }
 
     window.addEventListener('deviceorientation', (event) => {
+      // thumb is down, tell Blender to "Zoom", otherwise "Rotate"
+      const mode = mouseIsDown ? 'zoom' : 'rotate';
+
       socket.emit('gyro-data', {
         roomId: roomId,
+        mode: mode,
         alpha: event.alpha,
         beta: event.beta,
-        gamma: event.gamma
+        gamma: event.gamma,
+        isPressed: mouseIsDown,
+        // Send sensitivity values from your sliders
+        sensX: parseFloat(sx_slider.value),
+        sensY: parseFloat(sy_slider.value)
       });
     });
   };
