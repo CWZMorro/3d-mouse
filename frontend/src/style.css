@@ -163,11 +163,10 @@ button:hover {
 }
 
 .mode-selector {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  width: 100%;
+  background: #111; /* Dark background */
 }
 
 .mode-item {
@@ -185,6 +184,20 @@ button:hover {
   color: var(--color-accent);
   background: #181818;
   box-shadow: inset 0 -3px 0 var(--color-accent);
+}
+
+.mode-item .icon svg {
+  width: 28px;
+  height: 28px;
+  color: #ffffff; /* Makes the stroke-current color white */
+  display: block;
+}
+
+.mode-item img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: invert(1); /* Turns black PNG to white */
 }
 
 .canvas-container {
